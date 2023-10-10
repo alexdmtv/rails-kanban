@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title><%= yield(:page_title) %></title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+
+  <%= favicon_link_tag 'favicon-32x32.png' %>
+</head>
+
+<body class="relative flex h-screen bg-light-grey dark:bg-very-dark-grey">
+
+<% if user_signed_in? %>
+  <%= render partial: 'shared/sidebar' %>
+<% end %>
+
+<main class="flex flex-col h-full min-w-0 grow">
+  <%= yield %>
+</main>
+
+
+<%= turbo_frame_tag "modal" %>
+
+<div id="flash_container" class="z-50 absolute flex flex-col gap-y-2 top-1.5 right-1.5 overflow-hidden">
+  <%= render partial: 'shared/flash' %>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+<% provide :page_title, 'Kanban App' %>
+
+<% content_for :dots_menu_items do %>
+  <%= link_to 'Edit Profile', edit_user_registration_path, class: 'px-4' %>
+  <%= link_to 'Log Out', destroy_user_session_path, class: 'px-4', data: { turbo_method: :delete } %>
+<% end %>
+
+<%= render partial: 'shared/topbar' %>
+
+<div class="flex flex-col items-center justify-center h-full gap-6">
+  <h2 class="text-center text-heading-l text-medium-grey">
+    You don't have any boards yet. Create a new one to get started.
+  </h2>
+
+  <%= link_to new_board_path, data: { turbo_frame: 'modal' }, class: 'rounded-3xl px-5 text-white bg-main-purple py-3.5 text-heading-m hover:bg-main-purple-hover' do %>
+      + Create new board
+  <% end %>
+</div>

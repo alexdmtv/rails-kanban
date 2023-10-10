@@ -1,0 +1,30 @@
+<%= form_with model: board, html: { autocomplete: false }, id: 'board-form', class: 'flex flex-col gap-y-6', data: { controller: 'nested-form' } do |bf| %>
+
+  <template data-nested-form-target="template">
+    <%= bf.fields_for :lists, List.new, child_index: 'NEW_RECORD' do |lf| %>
+      <%= render partial: 'lists/list_fields', locals: { f: lf, idx: 0 } %>
+    <% end %>
+  </template>
+
+  <h2 class="text-heading-l dark:text-white"><%= board.new_record? ? 'Add New' : 'Edit' %> Board</h2>
+
+  <div class="field">
+    <%= bf.label :name %>
+    <%= bf.text_field :name, autofocus: true, placeholder: 'e.g. Web Design' %>
+    <%= field_errors(bf.object, :name) %>
+  </div>
+
+  <div class="field">
+    <p class="text-body-m text-medium-grey dark:text-white">Board Lists</p>
+    <div class="flex flex-col gap-y-3">
+      <% board.lists.each_with_index do |list, idx| %>
+        <%= bf.fields_for :lists, list do |lf| %>
+          <%= render partial: 'lists/list_fields', locals: { f: lf, idx: idx } %>
+        <% end %>
+      <% end %>
+      <%= button_tag '+ Add New List', class: 'secondary_sm_btn', data: { 'nested-form-target': "addBtn", action: 'nested-form#addItem' } %>
+    </div>
+  </div>
+
+  <%= bf.submit class: 'primary_sm_btn', data: { turbo_frame: '_top' } %>
+<% end %>

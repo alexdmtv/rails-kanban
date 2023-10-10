@@ -1,0 +1,7 @@
+<% if @task.valid? %>
+  <%= turbo_stream.prepend "#{dom_id(@task.list)}_content", @task %>
+<% end %>
+
+<%= turbo_stream.replace "task_form" do %>
+  <%= render partial: 'tasks/form', locals: { task: @task } %>
+<% end %>

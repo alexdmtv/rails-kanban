@@ -1,0 +1,31 @@
+<% provide :page_title, 'Sign In | Kanban App' %>
+
+<h2 class="text-heading-l dark:text-white">Log in</h2>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'flex flex-col gap-6' }) do |f| %>
+  <div class="flex flex-col gap-2">
+    <%= f.label :email, class: 'input_label' %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'input' %>
+  </div>
+
+  <div class="flex flex-col gap-2">
+    <%= f.label :password, class: 'input_label' %>
+    <%= f.password_field :password, autocomplete: "current-password", class: 'input' %>
+  </div>
+
+  <% if devise_mapping.rememberable? %>
+    <div class="flex items-center gap-4">
+      <%= f.check_box :remember_me, class: 'checkbox' %>
+      <%= f.label :remember_me, class: 'text-body-m text-medium-grey dark:text-white' %>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit "Log in", class: 'primary_lg_btn' %>
+  </div>
+<% end %>
+
+
+<%= render "devise/shared/social_buttons" %>
+
+<%= render "devise/shared/links" %>

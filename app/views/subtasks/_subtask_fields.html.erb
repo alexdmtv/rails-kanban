@@ -1,0 +1,15 @@
+<% subtask_placeholders = ['e.g. Make coffee', 'e.g. Drink coffee & smile'] %>
+
+<div data-nested-form-target="item" class="flex flex-col">
+  <div class="flex gap-x-4 items-center">
+    <%= f.text_field :title, placeholder: subtask_placeholders[idx] || '...', class: 'grow' %>
+    <%= f.hidden_field :_destroy %>
+    <button
+      data-action="nested-form#removeItem"
+      data-nested-form-new-record-param="<%= f.object.new_record? %>"
+    >
+      <%= svg_tag 'icon-cross' %>
+    </button>
+  </div>
+  <%= field_errors(f.object, :title) %>
+</div>

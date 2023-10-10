@@ -1,0 +1,47 @@
+<%= form_with model: task,
+              html: { autocomplete: false },
+              id: 'task_form',
+              class: 'flex flex-col gap-y-6',
+              data: { controller: 'nested-form' } do |task_form| %>
+
+  <template data-nested-form-target="template">
+    <%= task_form.fields_for :subtasks, Subtask.new, child_index: 'NEW_RECORD' do |subtask_from| %>
+      <%= render partial: 'subtasks/subtask_fields', locals: { f: subtask_from, idx: 0 } %>
+    <% end %>
+  </template>
+
+  <h2 class="text-heading-l dark:text-white"><%= task.new_record? ? 'Add New' : 'Edit' %> Task</h2>
+
+  <div class="field">
+    <%= task_form.label :title %>
+    <%= task_form.text_field :title, autofocus: true, placeholder: 'e.g. Take coffee break' %>
+    <%= field_errors(task_form.object, :title) %>
+  </div>
+
+  <div class="field">
+    <%= task_form.label :description %>
+    <%= task_form.text_area :description, rows: 4, placeholder: 'e.g. It’s always good to take a break. This 15 minute break will recharge the batteries a little.' %>
+    <%= field_errors(task_form.object, :description) %>
+  </div>
+
+  <div class="field">
+    <p class="text-body-m text-medium-grey dark:text-white">Subtasks</p>
+    <div class="flex flex-col gap-y-3">
+      <% task.subtasks.each_with_index do |subtask, idx| %>
+        <%= task_form.fields_for :subtasks, subtask do |subtask_from| %>
+          <%= render partial: 'subtasks/subtask_fields', locals: { f: subtask_from, idx: idx } %>
+        <% end %>
+      <% end %>
+      <%= button_tag '+ Add New Subtask', class: 'secondary_sm_btn', data: { 'nested-form-target': "addBtn", action: 'nested-form#addItem' } %>
+    </div>
+  </div>
+
+  <div class="relative flex flex-col gap-2 mt-6">
+    <%= task_form.label :list_id, "Current List" %>
+    <%= task_form.collection_select :list_id, task.list.board.lists, :id, :name, {}, { data: { controller: "single-select" }} %>
+    <%= field_errors(task_form.object, :list_id) %>
+  </div>
+
+  <%= task_form.submit class: 'primary_sm_btn' %>
+
+<% end %>

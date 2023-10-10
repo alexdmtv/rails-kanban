@@ -1,0 +1,16 @@
+<%= turbo_stream.replace 'task_show_form' do %>
+  <%= render partial: 'tasks/show_form', locals: { task: @task } %>
+<% end %>
+
+<%= turbo_stream.replace 'task_form' do %>
+  <%= render partial: 'tasks/form', locals: { task: @task } %>
+<% end %>
+
+<%= turbo_stream.prepend 'flash_container', partial: 'shared/flash', locals: { flash: flash } %>
+
+<% if @task.saved_change_to_attribute?(:list_id) %>
+  <%= turbo_stream.remove dom_id(@task) %>
+  <%= turbo_stream.prepend "#{dom_id(@task.list)}_content", @task %>
+<% elsif @task.valid? %>
+  <%= turbo_stream.replace dom_id(@task), @task %>
+<% end %>

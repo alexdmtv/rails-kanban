@@ -1,0 +1,41 @@
+<% flash.each do |key, value| %>
+  <div
+    class="bg-white dark:bg-very-dark-grey shadow rounded-md <%= flash_message_classes key %> p-4"
+    data-controller="flash"
+    data-transition-enter="transform ease-out duration-300 transition"
+    data-transition-enter-start="-translate-y-20 opacity-0 sm:translate-y-0 sm:translate-x-20"
+    data-transition-enter-end="translate-y-0 opacity-100 sm:translate-x-0"
+    data-transition-leave="transition ease-in duration-200"
+    data-transition-leave-start="opacity-100"
+    data-transition-leave-end="opacity-0"
+  >
+    <!--
+      Notification panel, dynamically insert this into the live region when it needs to be displayed
+
+      Entering: "transform ease-out duration-300 transition"
+        From: "translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
+        To: "translate-y-0 opacity-100 sm:translate-x-0"
+      Leaving: "transition ease-in duration-100"
+        From: "opacity-100"
+        To: "opacity-0"
+    -->
+    <div class="flex items-center">
+      <div class="flex-shrink-0">
+        <%= flash_icon key %>
+      </div>
+      <div class="ml-3">
+        <p class="text-sm font-medium"><%= value %></p>
+      </div>
+      <div class="ml-auto pl-3">
+        <div class="-mx-1.5 -my-1.5">
+          <button type="button" data-action="flash#dismiss" class="inline-flex rounded-md p-1.5 focus:outline-none focus:ring-2 focus:ring-offset-2 <%= flash_btn_classes key %>">
+            <span class="sr-only">Dismiss</span>
+            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

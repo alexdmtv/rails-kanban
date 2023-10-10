@@ -1,0 +1,40 @@
+<header class="z-20 flex items-center gap-4 px-4 bg-white shrink-0 basis-16 border-lines-light dark:bg-dark-grey dark:border-lines-dark md:basis-20 md:gap-6 md:border-b md:px-6 xl:basis-24 xl:gap-8 xl:px-8">
+
+  <div
+    id="topbar_logo"
+    class="md:hidden"
+  >
+    <%= svg_tag 'logo-mobile', class: 'md:hidden' %>
+    <%= svg_tag 'logo-dark', class: 'hidden md:block dark:hidden' %>
+    <%= svg_tag 'logo-light', class: 'hidden md:dark:block' %>
+  </div>
+
+  <div
+    id="topbar_logo_separator"
+    class="hidden w-px h-full border-r border-lines-light dark:border-lines-dark md:hidden"
+  >
+  </div>
+
+  <div class="flex items-center gap-2">
+    <h1 class="text-heading-l dark:text-white xl:text-heading-xl"><%= @board&.name || 'Kanban App' %></h1>
+    <button
+      class="md:hidden"
+      id="mobile_nav_popup_btn"
+    >
+      <%= svg_tag 'icon-chevron-down', id: 'icon_chevron_down' %>
+      <%= svg_tag 'icon-chevron-up', id: 'icon_chevron_up', class: 'hidden' %>
+    </button>
+  </div>
+
+  <%= button_to new_task_path, method: :get, disabled: @board.nil? || @board.lists.empty?, form_class: 'ml-auto', form: { data: { turbo_frame: 'modal' } }, class: 'rounded-3xl text-white px-4.5 bg-main-purple py-2.5 text-heading-m enabled:hover:bg-main-purple-hover disabled:cursor-not-allowed disabled:opacity-25 md:py-3.5 md:px-6' do %>
+    <%= hidden_field_tag :board_id, @board&.id %>
+    <%= svg_tag 'icon-add-task-mobile', class: 'md:hidden' %>
+    <span class="hidden md:block">+ Add New Task</span>
+  <% end %>
+
+  <%= render 'shared/dots_menu' %>
+</header>
+
+
+
+<%= render 'shared/topbar/mobile_nav_popup' %>

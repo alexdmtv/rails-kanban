@@ -1,0 +1,39 @@
+<% provide :page_title, @board.name %>
+
+<% content_for :dots_menu_items do %>
+  <%= link_to 'Edit board', edit_board_path(@board), data: { turbo_frame: 'modal' }, class: 'px-4' %>
+  <%= link_to 'Delete board', confirm_destroy_board_path(@board), data: { turbo_frame: 'modal' }, class: 'px-4 text-red' %>
+  <hr class="h-px border-lines-light dark:border-lines-dark">
+  <%= link_to 'Edit Profile', edit_user_registration_path, class: 'px-4' %>
+  <%= link_to 'Log Out', destroy_user_session_path, class: 'px-4', data: { turbo_method: :delete } %>
+<% end %>
+
+
+<%= render partial: 'shared/topbar' %>
+<div class="grow shrink-0 basis-0 overflow-auto px-4 md:px-6 xl:px-8">
+  <% if @board.lists.any? %>
+    <div
+      data-controller="lists"
+      class="flex min-h-full gap-6 py-6"
+    >
+      <%= render @board.lists %>
+
+      <div class="flex shrink-0 flex-col pt-10 pr-4 basis-[280px]">
+        <%= link_to '+ New List', edit_board_path(@board), data: { turbo_frame: 'modal' }, class: 'flex items-center justify-center shrink-0 grow rounded-lg bg-gradient-to-b from-medium-grey/10 to-medium-grey/5 text-heading-xl text-medium-grey hover:text-main-purple' %>
+      </div>
+    </div>
+
+  <% else %>
+
+    <div class="h-full flex flex-col items-center justify-center gap-6">
+      <h2 class="text-center text-heading-l text-medium-grey">
+        This board is empty. Create a new column to get started.
+      </h2>
+      <%= link_to '+ Create New List', edit_board_path(@board), data: { turbo_frame: 'modal' }, class: 'text-center rounded-3xl px-5 text-white bg-main-purple py-3.5 text-heading-m hover:bg-main-purple-hover' %>
+    </div>
+
+  <% end %>
+
+</div>
+
+

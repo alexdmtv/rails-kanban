@@ -1,0 +1,39 @@
+<nav class="flex min-w-max grow flex-col gap-5 overflow-x-auto py-4 pr-6">
+  <p class="px-6 uppercase text-heading-s text-medium-grey xl:px-8">
+    All boards
+    (<%= @user_boards.size %>)
+  </p>
+  <div id="boards-nav-list" class="flex flex-col">
+    <% @user_boards.each do |board| %>
+      <%= link_to board, class: "flex gap-3 items-center px-6 xl:px-8 py-4 text-heading-m rounded-r-full #{ current_page?(board_path(board)) ? 'text-white bg-main-purple' : 'text-medium-grey hover:bg-main-purple/10 hover:text-main-purple'} dark:hover:bg-white dark:hover:text-main-purple transition-color ease duration-200" do %>
+        <%= svg_tag 'icon-board' %> <%= board.name %>
+      <% end %>
+    <% end %>
+    <%= link_to new_board_path, data: { turbo_frame: 'modal' }, class: 'flex items-center gap-3 rounded-r-full px-6 py-4 text-heading-m text-main-purple hover:bg-main-purple/10 xl:px-8' do %>
+      <%= svg_tag 'icon-board' %>
+      + Create new board
+    <% end %>
+  </div>
+
+  <div class="ml-6 flex items-center justify-center gap-6 rounded-md py-3.5 bg-light-grey text-medium-grey dark:bg-very-dark-grey md:mt-auto">
+    <%= svg_tag 'icon-light-theme' %>
+    <!-- Enabled: "bg-indigo-600", Not Enabled: "bg-gray-200" -->
+    <button
+      data-controller="theme-switcher"
+      data-action="click->theme-switcher#toggleTheme"
+      type="button"
+      class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out bg-main-purple dark:bg-medium-grey hover:bg-main-purple-hover focus:outline-none focus:ring-2 focus:white focus:ring-offset-2"
+      role="switch"
+      aria-checked="false"
+    >
+      <span class="sr-only">Use setting</span>
+      <!-- Enabled: "translate-x-5", Not Enabled: "translate-x-0" -->
+      <span
+        data-theme-switcher-target="icon"
+        aria-hidden="true"
+        class="pointer-events-none inline-block h-5 w-5 translate-x-0 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"
+      ></span>
+    </button>
+    <%= svg_tag 'icon-dark-theme' %>
+  </div>
+</nav>

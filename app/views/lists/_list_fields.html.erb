@@ -1,0 +1,14 @@
+<div data-nested-form-target="item" class="flex flex-col">
+  <div class="flex gap-x-4 items-center">
+    <%= f.color_field :color_code, value: f.object.color_code || '#8471F2' %>
+    <%= f.text_field :name, class: 'grow' %>
+    <%= f.hidden_field :_destroy %>
+    <button
+      data-action="nested-form#removeItem"
+      data-nested-form-new-record-param="<%= f.object.new_record? %>"
+    >
+      <%= svg_tag 'icon-cross' %>
+    </button>
+  </div>
+  <%= field_errors(f.object, :name) %>
+</div>

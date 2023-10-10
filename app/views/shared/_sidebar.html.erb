@@ -1,0 +1,31 @@
+<aside
+  data-controller="sidebar"
+  data-sidebar-open-value="true"
+  class="hidden shrink-0 flex-col border-r bg-white transition-[flex-basis] duration-300 ease-out basis-[16.375rem] border-lines-light dark:bg-dark-grey dark:border-lines-dark md:flex xl:basis-[18.75rem]">
+  <div class="flex shrink-0 basis-20 items-center px-6 dark:bg-dark-grey xl:basis-24 xl:px-8">
+    <%= svg_tag 'logo-dark', class: 'dark:hidden' %>
+    <%= svg_tag 'logo-light', class: 'hidden dark:block' %>
+  </div>
+
+  <%= render partial: 'shared/nav' %>
+
+
+  <button
+    data-sidebar-target="closeBtn"
+    data-action="click->sidebar#toggle"
+    class="mr-6 mb-8 flex leading-none items-center gap-3 rounded-r-full px-6 py-4 text-heading-m text-medium-grey hover:bg-main-purple/10 xl:px-8 dark:hover:text-main-purple dark:hover:bg-white">
+    <%= svg_tag 'icon-hide-sidebar' %>
+    <span>
+      Hide Sidebar
+    </span>
+  </button>
+
+  <button
+    id="invisible_sidebar_btn"
+    class=" mr-6 mb-8 leading-none overflow-x-auto min-w-max hidden items-center gap-3 rounded-r-full px-6 py-4 text-heading-m text-medium-grey hover:bg-main-purple/10 xl:px-8 dark:hover:text-main-purple dark:hover:bg-white invisible">
+    <%= svg_tag 'icon-hide-sidebar' %>
+    <span>
+      Hide Sidebar
+    </span>
+  </button>
+</aside>

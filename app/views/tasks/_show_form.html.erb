@@ -1,0 +1,25 @@
+<%= form_with model: task, id: 'task_show_form', data: { controller: 'task-show-form', action: 'input->task-show-form#submit' } do |tf| %>
+  <div id="subtasks" class="">
+    <p class="mb-4 text-body-m text-medium-grey dark:text-white">
+      Subtasks (<%= task.subtasks.select { |subtask| subtask.is_completed == true }.count %>
+      of <%= task.subtasks.size %>)
+    </p>
+    <% unless task.subtasks.empty? %>
+      <div class="flex flex-col gap-y-2">
+        <% task.subtasks.each do |subtask| %>
+          <%= tf.fields_for :subtasks, subtask do |sf| %>
+            <div id="<%= dom_id(subtask) %>" class="flex items-center p-3 rounded gap-x-4 text-body-m bg-light-grey hover:bg-main-purple/25 dark:hover:bg-main-purple/25 dark:bg-very-dark-grey dark:text-white">
+              <%= sf.check_box :is_completed, class: 'peer' %>
+              <%= sf.label :is_completed, subtask.title, class: 'peer-checked:opacity-50 peer-checked:line-through text-black' %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="flex flex-col gap-2 mt-6">
+    <%= tf.label :list_id, "Current List" %>
+    <%= tf.collection_select :list_id, task.list.board.lists, :id, :name, {}, { data: { controller: "single-select" }} %>
+  </div>
+<% end %>
