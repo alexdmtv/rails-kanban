@@ -12,7 +12,6 @@ class User < ApplicationRecord
   has_many :subtasks, through: :tasks
 
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :first_name, :last_name, presence: true
 
   before_save { self.email = email.downcase }
 
