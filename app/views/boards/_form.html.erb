@@ -1,4 +1,4 @@
-<%= form_with model: board, html: { autocomplete: false }, id: 'board-form', class: 'flex flex-col gap-y-6', data: { controller: 'nested-form' } do |bf| %>
+<%= form_with model: board, html: { autocomplete: false }, id: 'board_form', class: 'flex flex-col gap-y-6', data: { controller: 'nested-form' } do |bf| %>
 
   <template data-nested-form-target="template">
     <%= bf.fields_for :lists, List.new, child_index: 'NEW_RECORD' do |lf| %>

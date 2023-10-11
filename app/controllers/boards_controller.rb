@@ -28,6 +28,7 @@ class BoardsController < ApplicationController
       if @board.save
         format.html { redirect_to @board, notice: 'Board was successfully created.' }
       else
+        format.turbo_stream { flash.now[:alert] = "Board wasn't saved." }
         format.html { render :new, status: :unprocessable_entity, alert: "Board wasn't saved." }
       end
     end
@@ -41,6 +42,7 @@ class BoardsController < ApplicationController
       if @board.save
         format.html { redirect_to @board, notice: 'Board was successfully updated.' }
       else
+        format.turbo_stream { flash.now[:alert] = "Board wasn't updated." }
         format.html { render :edit, status: :unprocessable_entity, alert: "Board wasn't updated." }
       end
     end

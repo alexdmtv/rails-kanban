@@ -1,0 +1,5 @@
+<%= turbo_stream.replace "board_form" do %>
+  <%= render partial: 'boards/form', locals: { board: @board } %>
+<% end %>
+
+<%= turbo_stream.prepend 'flash_container', partial: 'shared/flash', locals: { flash: flash } %>
