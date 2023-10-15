@@ -2,9 +2,9 @@
   id="<%= dom_id(task) %>"
   data-reorder-path="<%= reorder_task_path(task) %>"
   data-lists-target="task"
-  class="group/task hover:cursor-pointer rounded-lg bg-white dark:dark:bg-dark-grey px-4 py-6 drop-shadow-md"
+  class="px-4 py-6 bg-white rounded-lg group/task hover:cursor-pointer dark:dark:bg-dark-grey drop-shadow-md"
 >
-  <%= link_to task, data: { turbo_frame: "modal" }, class: 'flex flex-col gap-2' do %>
+  <%= link_to board_path(task.list.board, task: task.id), data: { turbo_frame: 'modal', turbo_action: 'replace' }, class: 'flex flex-col gap-2' do %>
     <h4 class="group-hover/task:text-main-purple text-heading-m dark:text-white"><%= task.title %></h4>
     <p class="text-body-m text-medium-grey">
       <%= task.subtasks.select { |subtask| subtask.is_completed == true }.count %>

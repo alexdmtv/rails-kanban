@@ -12,6 +12,12 @@ class BoardsController < ApplicationController
     @board = current_user.boards.includes(lists: { tasks: :subtasks })
                          .order('lists.board_order, tasks.list_order, subtasks.task_order')
                          .find_by(id: params[:id])
+
+    return unless params[:task].present?
+
+    @task = Task.find_by(id: params[:task], list_id: @board.lists.ids)
+
+    @is_modal_turbo_frame = request.headers['turbo-frame'] == 'modal'
   end
 
   def new

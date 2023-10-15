@@ -23,7 +23,10 @@
 </main>
 
 
-<%= turbo_frame_tag "modal" %>
+<%= yield :modal %>
+<% unless content_for?(:modal) %>
+  <%= turbo_frame_tag "modal" %>
+<% end %>
 
 <div id="flash_container" class="z-50 absolute flex flex-col gap-y-2 top-1.5 right-1.5 overflow-hidden">
   <%= render partial: 'shared/flash' %>

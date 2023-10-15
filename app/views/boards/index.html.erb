@@ -1,10 +1,5 @@
 <% provide :page_title, 'Kanban App' %>
 
-<% content_for :dots_menu_items do %>
-  <%= link_to 'Edit Profile', edit_user_registration_path, class: 'px-4' %>
-  <%= link_to 'Log Out', destroy_user_session_path, class: 'px-4', data: { turbo_method: :delete } %>
-<% end %>
-
 <%= render partial: 'shared/topbar' %>
 
 <div class="flex flex-col items-center justify-center h-full gap-6">

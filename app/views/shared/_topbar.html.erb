@@ -32,7 +32,15 @@
     <span class="hidden md:block">+ Add New Task</span>
   <% end %>
 
-  <%= render 'shared/dots_menu' %>
+  <%= render 'shared/dots_menu' do %>
+    <% if @board.present? %>
+    <%= link_to 'Edit board', edit_board_path(@board), data: { turbo_frame: 'modal' }, class: 'px-4' %>
+    <%= link_to 'Delete board', confirm_destroy_board_path(@board), data: { turbo_frame: 'modal' }, class: 'px-4 text-red' %>
+    <hr class="h-px border-lines-light dark:border-lines-dark">
+    <% end %>
+    <%= link_to 'Edit Profile', edit_user_registration_path, class: 'px-4' %>
+    <%= link_to 'Log Out', destroy_user_session_path, class: 'px-4', data: { turbo_method: :delete } %>
+  <% end %>
 </header>
 
 
