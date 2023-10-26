@@ -2,10 +2,13 @@
   id="<%= dom_id(task) %>"
   data-reorder-path="<%= reorder_task_path(task) %>"
   data-lists-target="task"
-  class="px-4 py-6 bg-white rounded-lg group/task hover:cursor-pointer dark:dark:bg-dark-grey drop-shadow-md"
+  class="rounded-lg bg-white px-4 py-6 drop-shadow-md group/task hover:cursor-pointer dark:dark:bg-dark-grey"
 >
   <%= link_to board_path(task.list.board, task: task.id), data: { turbo_frame: 'modal', turbo_action: 'replace' }, class: 'flex flex-col gap-2' do %>
-    <h4 class="group-hover/task:text-main-purple text-heading-m dark:text-white"><%= task.title %></h4>
+    <div class="flex items-start justify-between">
+      <h4 class="group-hover/task:text-main-purple text-heading-m dark:text-white"><%= task.title %></h4>
+      <%= svg_tag 'icon-drag-handle', class: "h-6 w-6 text-medium-grey ml-auto flex-shrink-0" %>
+    </div>
     <p class="text-body-m text-medium-grey">
       <%= task.subtasks.select { |subtask| subtask.is_completed == true }.count %>
       of  <%= task.subtasks.size %> subtasks</p>

@@ -1,5 +1,5 @@
 module SvgHelper
-  def svg_tag(icon_name, options = {})
+  def svg_tag(icon_name, **options)
     file = File.read(Rails.root.join("app/assets/images/#{icon_name}.svg"))
     return '(not found)' unless file
 

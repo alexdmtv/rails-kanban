@@ -4,18 +4,19 @@
   data-lists-target="list"
   class="flex shrink-0 flex-col gap-6 basis-[280px]">
   <div
-    class="list-header flex items-center gap-3 hover:cursor-grab"
+    class="flex items-start gap-3 list-header hover:cursor-grab"
   >
     <div
-      class="h-4 w-4 rounded-full bg-main-purple"
+      class="h-4 w-4 flex-shrink-0 rounded-full bg-main-purple"
       style="background-color: <%= list.color_code %>"
     ></div>
     <h3 class="uppercase text-heading-s text-medium-grey"><%= list.name %></h3>
+    <%= svg_tag 'icon-drag-handle', class: "h-6 w-6 text-medium-grey ml-auto flex-shrink-0" %>
   </div>
 
   <div
     id="<%= dom_id(list) %>_content"
-    class="flex flex-col gap-5 shrink-0 grow">
+    class="flex shrink-0 grow flex-col gap-5">
     <%= render list.tasks.sort_by { |task| task[:list_order] } %>
   </div>
 </div>
