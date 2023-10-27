@@ -1,15 +1,15 @@
 <% provide :page_title, @board.name %>
 
 <%= render partial: 'shared/topbar' %>
-<div class="px-4 overflow-auto grow shrink-0 basis-0 md:px-6 xl:px-8">
+<div class="pl-4 overflow-auto grow shrink-0 basis-0 md:pl-6 xl:pl-8">
   <% if @board.lists.any? %>
     <div
       data-controller="lists"
-      class="flex min-h-full gap-6 py-6"
+      class="grid grid-flow-col min-h-full gap-6 py-6"
     >
       <%= render @board.lists %>
 
-      <div class="flex shrink-0 flex-col pt-10 pr-4 basis-[280px]">
+      <div class="flex flex-col pt-10 pr-4 w-[280px]">
         <%= link_to '+ New List', edit_board_path(@board), data: { turbo_frame: 'modal' }, class: 'flex items-center justify-center shrink-0 grow rounded-lg bg-gradient-to-b from-medium-grey/10 to-medium-grey/5 text-heading-xl text-medium-grey hover:text-main-purple' %>
       </div>
     </div>

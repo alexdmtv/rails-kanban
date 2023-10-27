@@ -1,0 +1,17 @@
+@layer components {
+    .primary_lg_btn {
+        @apply text-center text-heading-m py-3.5 text-white bg-main-purple hover:bg-main-purple-hover rounded-3xl w-full cursor-pointer focus:border-main-purple focus:ring-main-purple;
+    }
+
+    .primary_sm_btn {
+        @apply w-full py-2 text-center text-white cursor-pointer text-body-l bg-main-purple hover:bg-main-purple-hover rounded-3xl focus:border-main-purple focus:ring-main-purple;
+    }
+
+    .secondary_sm_btn {
+        @apply w-full py-2 text-center cursor-pointer text-body-l text-main-purple bg-main-purple/10 hover:bg-main-purple/25 dark:bg-white rounded-3xl focus:border-main-purple focus:ring-main-purple;
+    }
+
+    .destructive_sm_btn {
+        @apply w-full py-2 text-center text-white cursor-pointer text-body-l bg-red hover:bg-red-hover rounded-3xl focus:border-main-purple focus:ring-main-purple;
+    }
+}

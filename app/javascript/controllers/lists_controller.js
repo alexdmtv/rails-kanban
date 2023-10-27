@@ -1,17 +1,22 @@
 import {Controller} from "@hotwired/stimulus"
-import Sortable from "sortablejs";
+import {Sortable} from "sortablejs";
 import {patch} from '@rails/request.js'
+
 
 // Connects to data-controller="lists"
 export default class extends Controller {
-    static targets = ['list', 'task']
+    static targets = ['list', 'task', 'listDragHandle', 'taskDragHandle']
 
     connect() {
+        // setup sortable
         this.sortable_lists = new Sortable(this.element, {
-            animation: 150,
-            handle: '.list-header',
+            animation: 200,
+            delay: 100,
+            delayOnTouchOnly: true,
+            touchStartThreshold: 5,
+            handle: '[data-lists-target="listDragHandle"]',
             draggable: '[data-lists-target="list"]',
-            forceAutoScrollFallback: true,
+            forceFallback: true,
 
             onEnd: async (e) => {
                 const newIndex = e.newIndex
@@ -26,9 +31,8 @@ export default class extends Controller {
                         console.log('List reordered')
                     }
                 }
-
-
             }
+
         })
 
         this.sortable_list_tasks = []
@@ -36,9 +40,14 @@ export default class extends Controller {
             this.sortable_list_tasks.push(
                 new Sortable(list.children[1], {
                     group: 'shared',
-                    animation: 150,
+                    animation: 200,
+                    delay: 100,
+                    touchStartThreshold: 5,
+                    delayOnTouchOnly: true,
+                    handle: '[data-lists-target="taskDragHandle"]',
                     draggable: '[data-lists-target="task"]',
-                    forceAutoScrollFallback: true,
+                    forceFallback: true,
+
 
                     onEnd: async (e) => {
                         const list_id = parseInt(e.to.parentNode.id.split('_')[1])
@@ -58,5 +67,12 @@ export default class extends Controller {
                 })
             )
         })
+    }
+
+    disconnect() {
+
+
+        this.sortable_lists = []
+        this.sortable_list_tasks = []
     }
 }

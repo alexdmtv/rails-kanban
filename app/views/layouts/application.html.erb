@@ -12,13 +12,13 @@
   <%= favicon_link_tag 'favicon-32x32.png' %>
 </head>
 
-<body class="relative flex h-screen bg-light-grey dark:bg-very-dark-grey">
+<body class="relative flex h-[100dvh] bg-light-grey dark:bg-very-dark-grey">
 
 <% if user_signed_in? %>
   <%= render partial: 'shared/sidebar' %>
 <% end %>
 
-<main class="flex flex-col h-full min-w-0 grow">
+<main class="flex flex-col h-[100dvh] min-w-0 grow">
   <%= yield %>
 </main>
 

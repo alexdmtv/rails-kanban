@@ -1,89 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700&display=swap');
 @import 'slim-select.css';
+@import "form-elements.css";
+@import "buttons.css";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
 @layer components {
-	.field {
-		@apply flex flex-col gap-y-2;
-	}
-
-	.field_with_errors {
-		@apply flex flex-col grow;
-	}
-
-	label {
-		@apply text-body-m text-medium-grey dark:text-white;
-	}
-
-	.field_with_errors label {
-		@apply text-red;
-	}
-
-	input[type='text'],
-	input[type='email'],
-	input[type='password'],
-	textarea {
-		@apply bg-transparent rounded focus:border-main-purple dark:text-white text-body-l placeholder:text-body-l border-medium-grey/25 placeholder:text-black/25 placeholder:dark:text-white/25 hover:border-main-purple focus:ring-main-purple;
-	}
-
-	.field_with_errors input[type='text'],
-	.field_with_errors input[type='email'],
-	.field_with_errors input[type='password'] {
-		@apply border-red focus:border-red focus:ring-red;
-	}
-
-	textarea {
-		@apply resize-none;
-	}
-
-	.field_with_errors textarea {
-		@apply border-red focus:border-red focus:ring-red;
-	}
-
-	input[type='checkbox'] {
-		@apply w-4 h-4 bg-white rounded-sm cursor-pointer checked:hover:bg-main-purple checked:focus:bg-main-purple focus:ring-main-purple border-medium-grey/25 checked:bg-main-purple dark:checked:bg-main-purple;
-	}
-
-	select {
-		@apply px-4 py-2 bg-transparent rounded border-medium-grey/25 text-body-l dark:text-white focus:border-main-purple hover:border-main-purple focus:ring-main-purple;
-	}
-
-	.field_with_errors select {
-		@apply border-red focus:border-red focus:ring-red;
-	}
-
-	input[type='color'] {
-		@apply w-6 h-6 p-0 border-none rounded appearance-none cursor-pointer;
-	}
-
-	input[type='color']::-webkit-color-swatch-wrapper {
-		@apply p-0 border-none rounded;
-	}
-
-	input[type='color']::-webkit-color-swatch {
-		@apply p-0 border-none rounded;
-	}
-
-	input[type='color']::-moz-color-swatch {
-		@apply p-0 border-none rounded;
-	}
-
-	.primary_lg_btn {
-		@apply text-center text-heading-m py-3.5 text-white bg-main-purple hover:bg-main-purple-hover rounded-3xl w-full cursor-pointer focus:border-main-purple focus:ring-main-purple;
-	}
-
-	.primary_sm_btn {
-		@apply w-full py-2 text-center text-white cursor-pointer text-body-l bg-main-purple hover:bg-main-purple-hover rounded-3xl focus:border-main-purple focus:ring-main-purple;
-	}
-
-	.secondary_sm_btn {
-		@apply w-full py-2 text-center cursor-pointer text-body-l text-main-purple bg-main-purple/10 hover:bg-main-purple/25 dark:bg-white rounded-3xl focus:border-main-purple focus:ring-main-purple;
-	}
-
-	.destructive_sm_btn {
-		@apply w-full py-2 text-center text-white cursor-pointer text-body-l bg-red hover:bg-red-hover rounded-3xl focus:border-main-purple focus:ring-main-purple;
-	}
+    .sortable-ghost {
+        @apply !border-main-purple !border-4 [&_*]:!opacity-0 !rounded-xl
+    }
 }
