@@ -20,6 +20,9 @@
 
   <div class="flex flex-col gap-2 mt-6">
     <%= tf.label :list_id, "Current List" %>
-    <%= tf.collection_select :list_id, task.list.board.lists, :id, :name, {}, { data: { controller: "single-select" }} %>
+    <%= tf.collection_select :list_id,
+                             task.list.board.lists.sort_by { _1.board_order },
+                             :id, :name, {},
+                             { data: { controller: "single-select" } } %>
   </div>
 <% end %>

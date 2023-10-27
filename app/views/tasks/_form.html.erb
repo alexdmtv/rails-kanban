@@ -38,7 +38,10 @@
 
   <div class="relative flex flex-col gap-2 mt-6">
     <%= task_form.label :list_id, "Current List" %>
-    <%= task_form.collection_select :list_id, task.list.board.lists, :id, :name, {}, { data: { controller: "single-select" }} %>
+    <%= task_form.collection_select :list_id,
+                                    task.list.board.lists.sort_by { _1.board_order },
+                                    :id, :name, {},
+                                    { data: { controller: "single-select" } } %>
     <%= field_errors(task_form.object, :list_id) %>
   </div>
 
