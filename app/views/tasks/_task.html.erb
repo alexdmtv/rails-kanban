@@ -4,13 +4,15 @@
   data-lists-target="task"
   class="flex flex-col gap-2 rounded-lg bg-white px-4 py-6 drop-shadow-md group/task dark:dark:bg-dark-grey"
 >
-  <div class="flex items-start justify-between">
-    <%= link_to board_path(task.list.board, task: task.id), data: { turbo_frame: 'modal', turbo_action: 'replace' } do %>
-      <h4 class="group-hover/task:text-main-purple text-heading-m dark:text-white"><%= task.title %></h4>
+  <div class="grid grid-flow-col items-start gap-2">
+    <%= link_to board_path(task.list.board, task: task.id), data: { turbo_frame: 'modal', turbo_action: 'replace' },
+                class: 'w-[220px]' do %>
+      <h4 class="group-hover/task:text-main-purple text-heading-m dark:text-white break-words"><%= task.title
+      %></h4>
     <% end %>
 
     <button
-      class="ml-auto flex-shrink-0 hover:cursor-grab select-none"
+      class="ml-auto hover:cursor-grab select-none"
       data-lists-target='taskDragHandle'
     >
       <%= svg_tag 'icon-drag-handle', class: "h-6 w-6 text-medium-grey" %>
