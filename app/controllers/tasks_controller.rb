@@ -2,8 +2,6 @@ class TasksController < ApplicationController
   before_action :authenticate_user!
   before_action :set_task, only: %i[show edit destroy update reorder]
 
-  def show; end
-
   def new
     board = current_user.boards.find_by(id: params[:board_id])
     if board.lists&.first
@@ -19,8 +17,11 @@ class TasksController < ApplicationController
 
   def create
     list = current_user.lists.find_by(id: params[:task][:list_id])
-    @task = list.tasks.build(task_params)
-    @task.list_order_position = :first
+
+    if list
+      @task = list.tasks.build(task_params)
+      @task.list_order_position = :first
+    end
 
     respond_to do |format|
       if @task.save
@@ -36,7 +37,7 @@ class TasksController < ApplicationController
 
   def update
     @task.assign_attributes(task_params)
-    @task.list_order_position = 0 if @task.list_id_changed?
+    @task.list_order_position = :first if @task.list_id_changed?
 
     respond_to do |format|
       if @task.save
@@ -65,13 +66,12 @@ class TasksController < ApplicationController
     if @task && list
       @task.list_id = list.id
       @task.list_order_position = params[:list_order_position]
-      if @task.save
-        render json: { message: 'Task order updated.' }, status: :ok
-      else
-        render json: { error: @task.errors.full_messages }, status: :unprocessable_entity
-      end
+    end
+
+    if @task.save
+      render json: { message: 'Task order updated.' }, status: :ok
     else
-      render json: { error: 'Failed to update task order.' }, status: :unprocessable_entity
+      render json: { error: @task.errors.full_messages }, status: :unprocessable_entity
     end
   end
 

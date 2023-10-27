@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :tasks, except: [:index] do
+  resources :tasks, except: %i[index show] do
     resources :subtasks, only: [:reorder] do
       member do
         patch :reorder
