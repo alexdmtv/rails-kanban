@@ -5,7 +5,7 @@
   <% if @board.lists.any? %>
     <div
       data-controller="lists"
-      class="grid grid-flow-col min-h-full gap-6 py-6 overflow-auto"
+      class="grid grid-flow-col justify-start min-h-full gap-6 py-6 overflow-auto"
     >
       <%= render @board.lists %>
 
