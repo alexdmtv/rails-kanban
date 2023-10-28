@@ -12,7 +12,7 @@ module RailsKanban
     config.load_defaults 7.0
 
     config.action_mailer.delivery_method = :postmark
-    config.action_mailer.postmark_settings = { api_token: Rails.application.credentials.postmark_api_token }
+    config.action_mailer.postmark_settings = { api_token: ENV['POSTMARK_API_TOKEN'] }
 
     # Configuration for the application, engines, and railties goes here.
     #
