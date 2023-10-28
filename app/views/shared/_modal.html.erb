@@ -44,12 +44,21 @@
           data-transition-leave="ease-in duration-200"
           data-transition-leave-start="opacity-100 translate-y-0 sm:scale-100"
           data-transition-leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-          class="transform overflow-hidden rounded-md bg-white p-6 pb-8 text-left shadow-xl transition-all max-w-[30rem] grow dark:bg-dark-grey my-20 lg:my-0"
+          class="transform overflow-hidden rounded-md bg-white px-6 pt-10 pb-8 text-left shadow-xl transition-all
+          max-w-[30rem] grow dark:bg-dark-grey my-20 lg:my-0 relative"
         >
+          <button
+            class="absolute top-2 right-2"
+            data-modal-target="closeBtn"
+            data-action="click->modal#close"
+          >
+            <%= svg_tag 'icon-modal-cross', class: 'w-5 h-5 text-medium-grey' %>
+          </button>
+
           <%= yield %>
         </div>
       </div>
     </div>
   </div>
-  
+
 <% end %>
