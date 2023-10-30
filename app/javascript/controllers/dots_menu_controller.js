@@ -3,21 +3,25 @@ import {toggle} from 'el-transition'
 
 // Connects to data-controller="dots-menu"
 export default class extends Controller {
-    static targets = ["button", "content"]
+    static targets = ["button", "content", "linksContainer"]
 
     connect() {
-        document.addEventListener('click', this.handleCloseClick)
+        document.addEventListener('click', this.handleOuterClick.bind(this))
+
+        // Close the popup after clicking an internal link.
+        const links = Array.from(this.linksContainerTarget.querySelectorAll('a'))
+        links.forEach((l) => l.dataset.action = "click -> dots-menu#handleToggle")
     }
 
     disconnect() {
-        super.disconnect();
+        document.removeEventListener('click', this.handleOuterClick.bind(this))
     }
 
-    handleToggle = (e) => {
+    handleToggle(e) {
         toggle(this.contentTarget)
     }
 
-    handleCloseClick = (e) => {
+    handleOuterClick(e) {
         if (!this.element.contains(e.target) && !this.contentTarget.classList.contains('hidden')) {
             this.handleToggle()
         }
