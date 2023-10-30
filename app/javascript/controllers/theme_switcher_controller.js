@@ -9,7 +9,7 @@ export default class extends Controller {
         this.initTheme()
     }
 
-    toggleTheme = () => {
+    toggleTheme() {
         if (localStorage.theme === 'light') {
             this.setDarkTheme()
         } else {
