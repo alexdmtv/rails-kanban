@@ -1,4 +1,4 @@
 <%= render 'shared/modal' do %>
-  <%= link_to "Back", @task, class: "text-body-m text-medium-grey mb-2"%>
+  <%= link_to "Back", board_path(@task.list.board, task: @task.id), class: "text-body-m text-medium-grey mb-2" %>
   <%= render partial: 'form', locals: { task: @task } %>
 <% end %>
