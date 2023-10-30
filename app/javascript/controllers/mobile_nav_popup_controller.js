@@ -7,23 +7,22 @@ export default class extends Controller {
 
     connect() {
         this.setBtnListener()
-        document.addEventListener('click', this.handleCloseClick)
+        document.addEventListener('click', this.handleCloseClick.bind(this))
     }
 
     disconnect() {
-        super.disconnect();
-        this.btn.removeEventListener('click', this.handleToggle)
-        document.removeEventListener('click', this.handleCloseClick)
+        this.btn.removeEventListener('click', this.handleToggle.bind(this))
+        document.removeEventListener('click', this.handleCloseClick.bind(this))
     }
 
     setBtnListener() {
         this.btn = document.getElementById('mobile_nav_popup_btn')
         if (this.btn) {
-            this.btn.addEventListener('click', this.handleToggle)
+            this.btn.addEventListener('click', this.handleToggle.bind(this))
         }
     }
 
-    handleToggle = () => {
+    handleToggle() {
         toggle(this.element)
         toggle(this.backdropTarget)
         toggle(this.modalPaneTarget)
@@ -38,7 +37,7 @@ export default class extends Controller {
         up_icon.classList.toggle('hidden')
     }
 
-    handleCloseClick = async (e) => {
+    async handleCloseClick(e) {
         if (!this.modalPaneTarget.contains(e.target)
             && !this.btn.contains(e.target)
             && !this.element.classList.contains('hidden')) {
