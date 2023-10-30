@@ -6,14 +6,14 @@ export default class extends Controller {
     static targets = ['addBtn', 'item', 'template']
 
     connect() {
-        this.element.addEventListener('keydown', this.handleKeydown)
+        this.element.addEventListener('keydown', this.handleKeydown.bind(this))
     }
 
     disconnect() {
-        this.element.removeEventListener('keydown', this.handleKeydown)
+        this.element.removeEventListener('keydown', this.handleKeydown.bind(this))
     }
 
-    handleKeydown = (event) => {
+    handleKeydown(event) {
         if (event.key === 'Enter' && event.target.matches('input[type="text"], select')) {
             event.preventDefault()
         }
@@ -23,7 +23,7 @@ export default class extends Controller {
         }
     }
 
-    addItem = (event) => {
+    addItem(event) {
         event.preventDefault()
 
         let content = this.getTemplateItem()
@@ -36,7 +36,7 @@ export default class extends Controller {
         }
     }
 
-    removeItem = (event) => {
+    removeItem(event) {
         event.preventDefault()
         event.stopPropagation();
 
@@ -51,7 +51,7 @@ export default class extends Controller {
         item.style.display = 'none'
     }
 
-    getTemplateItem = () => {
+    getTemplateItem() {
         let templateHTML = this.templateTarget.innerHTML.replace(/NEW_RECORD/g, new Date().valueOf());
         let templateCopy = document.createElement('template');
         templateCopy.innerHTML = templateHTML;
